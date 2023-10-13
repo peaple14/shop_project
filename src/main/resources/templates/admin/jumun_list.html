@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.ckeditor.com/4.23.0-lts/standard/ckeditor.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<!-- 메뉴 시작 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">관리자모드</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/goods_list">상품목록 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/member_list">회원목록 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/jumun_list">주문목록 </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 메뉴 끝 -->
+
+<!-- 주문 목록 시작 -->
+<div class="container my-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">번호</th>
+            <th scope="col">구매자</th>
+            <th scope="col">구매상품</th>
+            <th scope="col">배송지</th>
+            <th scope="col">연락처</th>
+            <th scope="col">삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>buyer001</td>
+            <td>Otto</td>
+            <td>Seoul, Korea</td>
+            <td>010-2345-6789</td>
+            <td>삭제</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 주문 목록 끝 -->
+</body>
+</html>
