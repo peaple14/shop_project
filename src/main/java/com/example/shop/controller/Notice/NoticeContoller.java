@@ -57,7 +57,6 @@ public class NoticeContoller {
 
     @PostMapping("/notice_ok")
     public String notice_ok(@ModelAttribute NoticeDTO noticeDTO){
-        System.out.println(noticeDTO);
         noticeService.save(noticeDTO);
         return "redirect:/notice";
     }
@@ -68,11 +67,15 @@ public class NoticeContoller {
         return "notice/notice_edit";
     }
 
-
+    @PostMapping("/edit_ok")
+    public String edit_ok(@RequestParam(name = "id") Long id,@ModelAttribute NoticeDTO noticeDTO){
+        System.out.println("현재 수정할 내용이 들어온건:" + noticeDTO);
+        noticeService.update(id,noticeDTO);
+        return "redirect:/notice";
+    }
 
     @GetMapping("/notice/delete")
     public String noticeDelete(@RequestParam(name = "id") Long id, Model mode){
-        System.out.println("id는:" + id );
         noticeService.noticeDelete(id);
         return "redirect:/notice";
     }

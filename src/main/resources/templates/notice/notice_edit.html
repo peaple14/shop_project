@@ -52,29 +52,32 @@
 
 <!-- 공지시작 -->
 <div class="container my-5">
+    <form method="post" action="/edit_ok">
     <div class="form-group">
         <label for="exampleInputEmail1">제목</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="notice_title"
                 th:value="${notice.noticeTitle}">
     </div>
 
     <div class="form-group">
         <label for="exampleInputEmail2">이름</label>
-        <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
+        <input type="text" class="form-control" id="exampleInputEmail2" name="notice_name" aria-describedby="emailHelp"
                disabled th:value="${notice.notice_name}">
     </div>
 
     <div class="form-group">
         <label for="exampleFormControlTextarea1">내용</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  th:text="${notice.notice_memo}"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="notice_memo" th:text="${notice.notice_memo}"></textarea>
     </div>
+
+        <tr>
+            <input type="hidden" name="id" th:value="${notice.id}">
+            <td colspan="2" ><input type="submit" value="수정"></td>
+
+        </tr>
     </form>
 
-    <a th:href="@{/notice/modify(id=${notice.id})}" class="btn btn-primary">수정완료</a>
 
-
-
-    <a class="btn btn-secondary" href="/notice" role="button">글목록</a>
 </div>
 <!-- 공지 끝 -->
 <!-- 푸터 시작 -->

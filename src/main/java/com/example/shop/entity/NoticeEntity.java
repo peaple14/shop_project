@@ -28,20 +28,18 @@ public class NoticeEntity {
     @Column(nullable = true)
     private String notice_wdate;
 
-    //    @Builder https://velog.io/@byeongju/JPA-Failed-to-create-query-for-method-public-abstract
-//    private Notification(NotificationType notificationType, Member member, Post post, Comment comment) {
-//        this.notificationType = notificationType;
-//        this.member = member;
-//        this.post = post;
-//        this.comment = comment;
-//        this.inquired = false;
-//    } 이런식으로 builder로 변경하기
+
     public static NoticeEntity toNoticeEntity(NoticeDTO noticeDTO){
         NoticeEntity noticeEntity = new NoticeEntity();
         noticeEntity.setNoticeTitle(noticeDTO.getNotice_title());
         noticeEntity.setNotice_name(noticeDTO.getNotice_name());
         noticeEntity.setNotice_memo(noticeDTO.getNotice_memo());
         return noticeEntity;
+    }
 
+    //더티 체킹
+    public void update(String noticeTitle, String notice_memo){
+        this.noticeTitle = noticeTitle;
+        this.notice_memo = notice_memo;
     }
 }
