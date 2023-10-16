@@ -1,4 +1,4 @@
-package com.example.shop.controller.Member;
+package com.example.shop.controller;
 import com.example.shop.dto.MemberDTO;
 import com.example.shop.service.MemberService;
 import lombok.RequiredArgsConstructor;

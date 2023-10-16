@@ -1,4 +1,4 @@
-package com.example.shop.controller.Notice;
+package com.example.shop.controller;
 
 import com.example.shop.dto.NoticeDTO;
 import com.example.shop.entity.NoticeEntity;
@@ -69,7 +69,6 @@ public class NoticeContoller {
 
     @PostMapping("/edit_ok")
     public String edit_ok(@RequestParam(name = "id") Long id,@ModelAttribute NoticeDTO noticeDTO){
-        System.out.println("현재 수정할 내용이 들어온건:" + noticeDTO);
         noticeService.update(id,noticeDTO);
         return "redirect:/notice";
     }

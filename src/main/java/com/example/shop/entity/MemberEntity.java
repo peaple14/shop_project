@@ -22,14 +22,17 @@ public class MemberEntity {
     private String user_pass;
 
     @Column
+    private String user_email;
+
+    @Column
     private String user_name;
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setUser_id(memberDTO.getUser_id());
         memberEntity.setUser_pass(memberDTO.getUser_pass());
+        memberEntity.setUser_email(memberDTO.getUser_email());
         memberEntity.setUser_name(memberDTO.getUser_name());
         return memberEntity;
-
     }
 }
