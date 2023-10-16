@@ -51,60 +51,32 @@
 
 
 <!-- 공지시작 -->
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th scope="col">번호</th>
-        <th scope="col">제목</th>
-        <th scope="col">이름</th>
-        <th scope="col">날짜</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="notice : ${list}">
-        <td th:text="${notice.id}"></td>
-        <td>
-            <a th:text="${notice.noticeTitle}" th:href="@{'/notice_memo/' + ${notice.id}}"></a>
-        </td>
-        <td th:text="${notice.notice_name}"></td>
-        <td th:text="${notice.notice_wdate}"></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container my-5">
+    <div class="form-group">
+        <label for="exampleInputEmail1">제목</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                th:value="${notice.noticeTitle}">
+    </div>
 
-<a class="btn btn-primary float-right" href="/notice_add">글쓰기</a>
+    <div class="form-group">
+        <label for="exampleInputEmail2">이름</label>
+        <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
+               disabled th:value="${notice.notice_name}">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">내용</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  th:text="${notice.notice_memo}"></textarea>
+    </div>
+    </form>
+
+    <a th:href="@{/notice/modify(id=${notice.id})}" class="btn btn-primary">수정완료</a>
 
 
+
+    <a class="btn btn-secondary" href="/notice" role="button">글목록</a>
 </div>
 <!-- 공지 끝 -->
-
-<!-- 페이지 번호 출력 시작 -->
-<div class="container my-3">
-    <div class="pagination justify-content-center">
-        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/notice(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
-            <strong th:if="${page == nowPage}" th:text="${page}" style="color: red"></strong>
-        </th:block>
-    </div>
-</div>
-<!-- 페이지 번호 출력 끝 -->
-
-<!-- 검색 폼 -->
-<div class="container my-3">
-    <form th:action="@{/notice}" method="get">
-        <div class="input-group">
-            <input class="form-control" type="text" name="searchKeyword" th:value="${searchKeyword}" placeholder="검색어 입력">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">검색</button>
-            </div>
-        </div>
-    </form>
-</div>
-<!-- 검색 폼 끝 -->
-
-
-
-
 <!-- 푸터 시작 -->
 <div class="jumbotron jumbotron-fluid">
     <div class="container">

@@ -55,23 +55,27 @@
     <div class="form-group">
         <label for="exampleInputEmail1">제목</label>
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-        disabled value="제목입니다">
+               disabled th:value="${notice.noticeTitle}">
     </div>
 
     <div class="form-group">
         <label for="exampleInputEmail2">이름</label>
         <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-               disabled value="공지사항">
+               disabled th:value="${notice.notice_name}">
     </div>
 
     <div class="form-group">
         <label for="exampleFormControlTextarea1">내용</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>내용입니다.</textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled th:text="${notice.notice_memo}"></textarea>
     </div>
     </form>
 
+    <a th:href="@{/notice/delete(id=${notice.id})}" class="btn btn-danger" >글 삭제</a>
+    <a th:href="@{'/notice_edit/' + ${notice.id}}" class="btn btn-primary">글 수정</a>
 
-    <a class="btn btn-secondary btn-lg" href="/notice" role="button">글목록</a>
+
+
+    <a class="btn btn-secondary" href="/notice" role="button">글목록</a>
 </div>
 <!-- 공지 끝 -->
 <!-- 푸터 시작 -->
