@@ -30,7 +30,7 @@ public class NoticeService {
     public void update(Long id,NoticeDTO noticeDTO) {
         NoticeEntity noticeEntity = noticeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("아이디: " + id + " 를 찾을수 없습니다."));
-        noticeEntity.update(noticeDTO.getNotice_title(),noticeDTO.getNotice_memo());
+        noticeEntity.update(noticeDTO.getNotice_title(),noticeDTO.getNotice_name(),noticeDTO.getNotice_memo());
     }
 
     public Page<NoticeEntity> noticelist(Pageable noticeDTO){//page번호와 page크기를 pageable로 전달

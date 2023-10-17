@@ -38,8 +38,9 @@ public class NoticeEntity {
     }
 
     //더티 체킹
-    public void update(String noticeTitle, String notice_memo){
+    public void update(String noticeTitle, String notice_name,String notice_memo){
         this.noticeTitle = noticeTitle;
+        this.notice_name = notice_name;
         this.notice_memo = notice_memo;
     }
 }

@@ -9,69 +9,64 @@
 
 <body>
 <!-- 메뉴 시작 -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-white">
-    <div class="container ">
-        <a class="navbar-brand text-dark" href="/">중고쇼핑몰</a>
-        <button class="navbar-toggler bg-secondary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">관리자모드</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-dark" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/shop">제품</a>
+                    <a class="nav-link" href="/goods_list">상품목록 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/join">회원가입</a>
+                    <a class="nav-link" href="/member_list">회원목록 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/login">로그인</a>
-                </li>
-                <!-- 로그인 후 -->
-                <!--<li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/edit">정보수정</a>
+                    <a class="nav-link" href="/jumun_list">주문목록 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/logout">로그아웃</a>
-                </li>-->
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/notice">공지사항</a>
+                    <a class="nav-link" href="/admin/notice">공지사항 </a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </div>
 </nav>
 <!-- 메뉴 끝 -->
 
-
 <!-- 공지시작 -->
 <div class="container my-5">
+    <form method="post" action="/edit_ok">
     <div class="form-group">
         <label for="exampleInputEmail1">제목</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-               disabled th:value="${notice.noticeTitle}">
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="notice_title"
+                th:value="${notice.noticeTitle}">
     </div>
 
     <div class="form-group">
         <label for="exampleInputEmail2">이름</label>
-        <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-               disabled th:value="${notice.notice_name}">
+        <input type="text" class="form-control" id="exampleInputEmail2" name="notice_name" aria-describedby="emailHelp"
+               th:value="${notice.notice_name}">
     </div>
 
     <div class="form-group">
         <label for="exampleFormControlTextarea1">내용</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled th:text="${notice.notice_memo}"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="notice_memo" th:text="${notice.notice_memo}"></textarea>
     </div>
+
+        <tr>
+            <input type="hidden" name="id" th:value="${notice.id}">
+            <td colspan="2" ><input type="submit" value="수정"></td>
+
+        </tr>
     </form>
 
 
-    <a class="btn btn-secondary" href="/notice" role="button">글목록</a>
 </div>
 <!-- 공지 끝 -->
 <!-- 푸터 시작 -->

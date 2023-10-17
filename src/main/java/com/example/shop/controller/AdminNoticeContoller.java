@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-public class NoticeContoller {
+public class AdminNoticeContoller {
 
 
     //수정html만들기 , 검색쪽 에러 물어보기
     private final NoticeService noticeService;
 
-    @GetMapping("/notice")
+    @GetMapping("/admin/notice")
     public String notice(Model model,
                          @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
             ,String searchKeyword) {
@@ -41,16 +41,42 @@ public class NoticeContoller {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        return "notice/notice_list";
+        return "admin/notice/notice_list";
     }
 
-    @GetMapping("/notice_memo/{id}")
+    @GetMapping("/admin/notice_memo/{id}")
     public String n_memo(Model model, @PathVariable("id") long id){
         model.addAttribute("notice",noticeService.noticeView(id));
-        return "notice/notice_memo";
+        return "admin/notice/notice_memo";
     }
 
+    @GetMapping("/admin/notice_add")
+    public String notice_add(){
+        return "admin/notice/notice_insert";
+    }
 
+    @PostMapping("/admin/notice_ok")
+    public String notice_ok(@ModelAttribute NoticeDTO noticeDTO){
+        noticeService.save(noticeDTO);
+        return "redirect:/admin/notice";
+    }
 
+    @GetMapping("/admin/notice_edit/{id}")
+    public String n_edit(Model model, @PathVariable("id") long id){
+        model.addAttribute("notice",noticeService.noticeView(id));
+        return "admin/notice/notice_edit";
+    }
+
+    @PostMapping("/edit_ok")
+    public String edit_ok(@RequestParam(name = "id") Long id,@ModelAttribute NoticeDTO noticeDTO){
+        noticeService.update(id,noticeDTO);
+        return "redirect:/admin/notice";
+    }
+
+    @GetMapping("/notice/delete")
+    public String noticeDelete(@RequestParam(name = "id") Long id, Model mode){
+        noticeService.noticeDelete(id);
+        return "redirect:/admin/notice";
+    }
 
 }

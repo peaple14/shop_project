@@ -16,12 +16,9 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String index(){
-        return "admin";
+        return "/admin/admin";
     }
-    @GetMapping("admin/notice")
-    public String notice(){
-        return "/admin/notice_write.html";
-    }
+
 
     @PostMapping("/admin/login")
     public String ok(@ModelAttribute AdminDTO adminDTO) {
