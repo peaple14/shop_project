@@ -28,12 +28,16 @@ public class NoticeEntity {
     @Column(nullable = true)
     private String notice_wdate;
 
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private Long notice_view;
+
 
     public static NoticeEntity toNoticeEntity(NoticeDTO noticeDTO){
         NoticeEntity noticeEntity = new NoticeEntity();
         noticeEntity.setNoticeTitle(noticeDTO.getNotice_title());
         noticeEntity.setNotice_name(noticeDTO.getNotice_name());
         noticeEntity.setNotice_memo(noticeDTO.getNotice_memo());
+        noticeEntity.setNotice_view(noticeEntity.getNotice_view());
         return noticeEntity;
     }
 

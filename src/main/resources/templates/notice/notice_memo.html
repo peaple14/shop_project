@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,31 +49,20 @@
 </nav>
 <!-- 메뉴 끝 -->
 
-
-<!-- 공지시작 -->
+<!-- 공지 시작 -->
 <div class="container my-5">
-    <div class="form-group">
-        <label for="exampleInputEmail1">제목</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-               disabled th:value="${notice.noticeTitle}">
-    </div>
-
-    <div class="form-group">
-        <label for="exampleInputEmail2">이름</label>
-        <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-               disabled th:value="${notice.notice_name}">
-    </div>
-
+    <h2 th:text="${notice.noticeTitle}"></h2>
+    <p th:text="'작성일: ' + ${notice.notice_wdate}"></p>
+    <p th:text="'작성자: ' + ${notice.notice_name}"></p>
+    <p th:text="'조회수: ' + ${notice.notice_view}"></p>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">내용</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled th:text="${notice.notice_memo}"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" th:text="${notice.notice_memo}" readonly></textarea>
     </div>
-    </form>
-
-
     <a class="btn btn-secondary" href="/notice" role="button">글목록</a>
 </div>
 <!-- 공지 끝 -->
+
 <!-- 푸터 시작 -->
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -81,11 +70,9 @@
         <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
     </div>
 </div>
-
 <!-- 푸터 끝 -->
-
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </html>

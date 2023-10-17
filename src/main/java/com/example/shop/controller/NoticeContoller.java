@@ -46,11 +46,9 @@ public class NoticeContoller {
 
     @GetMapping("/notice_memo/{id}")
     public String n_memo(Model model, @PathVariable("id") long id){
+        noticeService.getview(id);
         model.addAttribute("notice",noticeService.noticeView(id));
         return "notice/notice_memo";
     }
-
-
-
 
 }

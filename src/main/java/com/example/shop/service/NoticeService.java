@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -51,4 +52,19 @@ public class NoticeService {
     public Page<NoticeEntity> noticeSearchList(String SearchKeyword,Pageable pageable){//찾을키워드,페이지크기
         return noticeRepository.findByNoticeTitleContaining(SearchKeyword, pageable);
     }
+
+
+    public NoticeEntity getview(Long id) {
+        Optional<NoticeEntity> question = this.noticeRepository.findById(id);
+        if (question.isPresent()) {
+            NoticeEntity notice1 = question.get();
+            notice1.setNotice_view(notice1.getNotice_view()+1);
+            this.noticeRepository.save(notice1);
+            return notice1;
+        } else {
+            throw new IllegalArgumentException("Notion not found");
+        }
+    }
+
+
 }

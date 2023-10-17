@@ -14,5 +14,6 @@ import lombok.ToString;
         private String notice_name;
         private String notice_memo;
         private String notice_wdate;
+        private Long notice_view;
     }
 
