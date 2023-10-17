@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "notice_table")
-public class NoticeEntity {
+public class NoticeEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,14 +22,13 @@ public class NoticeEntity {
     @Column
     private String notice_name;
 
-    @Column
+    @Column(length = 500)
     private String notice_memo;
 
-    @Column(nullable = true)
-    private String notice_wdate;
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
-    private Long notice_view;
+
+    @Column(columnDefinition = "Long default 0", nullable = false)
+    private int notice_view = 0; // 기본값을 0으로 초기화
 
 
     public static NoticeEntity toNoticeEntity(NoticeDTO noticeDTO){

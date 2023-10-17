@@ -33,6 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/notice">공지사항 </a>
                 </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/admin/notice"><span th:text = "${session.loginName}"></span> </a>-->
+<!--                </li>-->
             </ul>
         </div>
     </div>
@@ -57,12 +60,12 @@
             <a th:text="${notice.noticeTitle}" th:href="@{'/admin/notice_memo/' + ${notice.id}}"></a>
         </td>
         <td th:text="${notice.notice_name}"></td>
-        <td th:text="${notice.notice_wdate}"></td>
+        <td th:text="${notice.createdTime}"></td>
     </tr>
     </tbody>
 </table>
 
-<a class="btn btn-primary float-right" href="/notice_add">글쓰기</a>
+<a class="btn btn-primary float-right" href="/admin/notice_add">글쓰기</a>
 
 
 </div>
@@ -72,11 +75,13 @@
 <div class="container my-3">
     <div class="pagination justify-content-center">
         <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/templates/admin/notice(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
+            <a th:if="${page != nowPage}" th:href="@{/admin/notice(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
             <strong th:if="${page == nowPage}" th:text="${page}" style="color: red"></strong>
         </th:block>
     </div>
 </div>
+
+
 <!-- 페이지 번호 출력 끝 -->
 
 <!-- 검색 폼 -->

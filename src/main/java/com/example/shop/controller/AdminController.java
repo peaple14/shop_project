@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class AdminController {
@@ -19,18 +21,23 @@ public class AdminController {
         return "/admin/admin";
     }
 
-
     @PostMapping("/admin/login")
-    public String ok(@ModelAttribute AdminDTO adminDTO) {
-        AdminDTO loginResult = adminService.login(adminDTO);
+    public String save(@ModelAttribute AdminDTO adminDTO, HttpSession session){
+        System.out.println("adminDTO = " + adminDTO);
+        AdminDTO loginResult = adminService.login(adminDTO); //서비스에서 처리한결과 loginresult로.
         if(loginResult != null){
             //로그인 성공
-            return "/admin/goods";
+            session.setAttribute("loginId",loginResult.getAdmId());
+            session.setAttribute("loginName", loginResult.getAdmName());
+            System.out.println("로그인 성공");
+            return "redirect:/admin/notice";
         }
         else{
+            System.out.println("로그인 실패");
             //로그인 실패
-            return "/admin";
         }
+        return null;
     }
+
 
 }

@@ -28,6 +28,7 @@ public class AdminEntity {
         AdminEntity adminEntity = new AdminEntity();
         adminEntity.setAdmId(adminDTO.getAdmId());
         adminEntity.setAdmPass(adminDTO.getAdmPass());
+        adminEntity.setAdName(adminEntity.getAdName());
         return adminEntity;
     }
 

@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-    @Getter
+
+import java.time.LocalDateTime;
+
+@Getter
     @Setter
     @NoArgsConstructor
     @ToString
@@ -13,7 +16,9 @@ import lombok.ToString;
         private String notice_title;
         private String notice_name;
         private String notice_memo;
-        private String notice_wdate;
         private Long notice_view;
+        private LocalDateTime noticeCreatedTime;
+        private LocalDateTime noticeUpdatedTime;
+
     }
 

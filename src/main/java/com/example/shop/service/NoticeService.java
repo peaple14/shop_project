@@ -21,12 +21,14 @@ public class NoticeService {
 
     private final NoticeRepository noticeRepository;
 
+    //저장용
     @Transactional
     public void save(NoticeDTO noticeDTO) {
         NoticeEntity noticeEntity = NoticeEntity.toNoticeEntity(noticeDTO);
         noticeRepository.save(noticeEntity);
     }
 
+    //수정용
     @Transactional
     public void update(Long id,NoticeDTO noticeDTO) {
         NoticeEntity noticeEntity = noticeRepository.findById(id)
@@ -34,6 +36,7 @@ public class NoticeService {
         noticeEntity.update(noticeDTO.getNotice_title(),noticeDTO.getNotice_name(),noticeDTO.getNotice_memo());
     }
 
+    //리스트불러오기용
     public Page<NoticeEntity> noticelist(Pageable noticeDTO){//page번호와 page크기를 pageable로 전달
         return  noticeRepository.findAll(noticeDTO);
     }
@@ -44,16 +47,19 @@ public class NoticeService {
         return noticeRepository.findById(id).get();
     }
 
+    //삭제용
     @Transactional
     public void noticeDelete(Long id){
         noticeRepository.deleteById(id);
     }
 
+    //검색용
     public Page<NoticeEntity> noticeSearchList(String SearchKeyword,Pageable pageable){//찾을키워드,페이지크기
         return noticeRepository.findByNoticeTitleContaining(SearchKeyword, pageable);
     }
 
 
+    //조회수증가용
     public NoticeEntity getview(Long id) {
         Optional<NoticeEntity> question = this.noticeRepository.findById(id);
         if (question.isPresent()) {

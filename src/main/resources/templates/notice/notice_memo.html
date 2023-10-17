@@ -52,7 +52,7 @@
 <!-- 공지 시작 -->
 <div class="container my-5">
     <h2 th:text="${notice.noticeTitle}"></h2>
-    <p th:text="'작성일: ' + ${notice.notice_wdate}"></p>
+    <p th:text="${notice.createdTime}"></p>
     <p th:text="'작성자: ' + ${notice.notice_name}"></p>
     <p th:text="'조회수: ' + ${notice.notice_view}"></p>
     <div class="form-group">
