@@ -4,8 +4,11 @@ import com.example.shop.dto.MemberDTO;
 import com.example.shop.dto.NoticeDTO;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,6 +32,20 @@ public class NoticeEntity extends BaseEntity{
 
     @Column(columnDefinition = "Long default 0", nullable = false)
     private int notice_view = 0; // 기본값을 0으로 초기화
+
+//    /*파일 첨부여부 컬럼 추가*/
+//    @Column
+//    private int fileAttached; //파일 첨부의 값을 0 or 1을 받는다.
+//
+//
+//    @OneToMany(mappedBy = "noticeEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+//    private List<NoticeFileEntity> noticeFileEntityList = new ArrayList<>(); //
+
+    //댓글연동 부모엔티티-자식엔티티 연결
+    @OneToMany(mappedBy = "noticeEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<CommentEntity> commentEntityList = new ArrayList<>();
+
+
 
 
     public static NoticeEntity toNoticeEntity(NoticeDTO noticeDTO){

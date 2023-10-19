@@ -1,18 +1,18 @@
 package com.example.shop.service;
 
-import com.example.shop.dto.MemberDTO;
 import com.example.shop.dto.NoticeDTO;
-import com.example.shop.entity.MemberEntity;
 import com.example.shop.entity.NoticeEntity;
-import com.example.shop.repository.MemberRepository;
 import com.example.shop.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
+
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+
 import java.util.Optional;
 
 @Service
@@ -20,6 +20,33 @@ import java.util.Optional;
 public class NoticeService {
 
     private final NoticeRepository noticeRepository;
+//    private final NoticeFileRepository noticeFileRepository;
+
+    //저장용
+//    @Transactional
+//    public void save(NoticeDTO noticeDTO) throws IOException {
+//        if(noticeDTO.getNoticeFile().isEmpty()) {
+//            //첨부파일이 없다면
+//            NoticeEntity noticeEntity = NoticeEntity.toNoticeEntity(noticeDTO);
+//            noticeRepository.save(noticeEntity); //entity값으로 반환
+//        } else {
+//            //다중업로드 : 부모 게시판 글 등록
+//            NoticeEntity noticeEntity = NoticeEntity.toNoticeEntity(noticeDTO); //공지사항 테이블에 글등록
+//            Long savedId = noticeRepository.save(noticeEntity).getId(); //id값을 가져온다.
+//            NoticeEntity notice = noticeRepository.findById(savedId).get(); //부모 entity에서 id값을 가져옴
+//
+//            for(MultipartFile noticeFile: noticeDTO.getNoticeFile()){
+//                String originalFileName = noticeFile.getOriginalFilename(); //파일의 이름을 가져온다.
+//                String storedFileName = System.currentTimeMillis() + "_" + originalFileName; //서버 저장용 이름을 생성한다. 1970.01.01
+//                String savePath ="C:/shop_img/" + storedFileName; //파일의 저장경로
+//                noticeFile.transferTo(new File(savePath)); //파일을 해당 경로에 저장
+//
+//                NoticeFileEntity noticeFileEntity = NoticeFileEntity.toNoticeFileEntity(notice, originalFileName, storedFileName);
+//                noticeRepository.save(noticeFileEntity);
+//            }
+//
+//        }
+//    }
 
     //저장용
     @Transactional
@@ -43,10 +70,17 @@ public class NoticeService {
 
 
     // 특정 게시글 불러오기
-    public NoticeEntity noticeView(Long id){
-        return noticeRepository.findById(id).get();
-    }
+    public NoticeDTO findById(Long id){
+        Optional<NoticeEntity> optionalNoticeEntity = noticeRepository.findById(id);
+        if (optionalNoticeEntity.isPresent()){
+            NoticeEntity noticeEntity = optionalNoticeEntity.get();
+            NoticeDTO noticeDTO = NoticeDTO.toNoticeDTO(noticeEntity);
+            return noticeDTO;
 
+        } else {
+            return null;
+        }
+    }
     //삭제용
     @Transactional
     public void noticeDelete(Long id){

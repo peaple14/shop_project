@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
@@ -20,6 +22,7 @@ public class AdminNoticeController {
 
     private final NoticeService noticeService;
 
+    //일반고객 공지사항볼때
     @GetMapping("/notice")
     public String notice(Model model,
                          @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
@@ -44,9 +47,11 @@ public class AdminNoticeController {
         return "admin/notice/notice_list";
     }
 
+    //공지사항 자세히보기
     @GetMapping("/notice_memo/{id}")
-    public String n_memo(Model model, @PathVariable("id") long id){
-        model.addAttribute("notice",noticeService.noticeView(id));
+    public String n_memo(Model model, @PathVariable long id){
+        NoticeDTO noticeDTO = noticeService.findById(id);
+        model.addAttribute("notice",noticeService.findById(id));
         return "admin/notice/notice_memo";
     }
 
@@ -56,14 +61,14 @@ public class AdminNoticeController {
     }
 
     @PostMapping("/notice_ok")
-    public String notice_ok(@ModelAttribute NoticeDTO noticeDTO){
+    public String notice_ok(@ModelAttribute NoticeDTO noticeDTO) throws IOException {
         noticeService.save(noticeDTO);
         return "redirect:/admin/notice";
     }
 
     @GetMapping("/notice_edit/{id}")
     public String n_edit(Model model, @PathVariable("id") long id){
-        model.addAttribute("notice",noticeService.noticeView(id));
+        model.addAttribute("notice",noticeService.findById(id));
         return "admin/notice/notice_edit";
     }
 
