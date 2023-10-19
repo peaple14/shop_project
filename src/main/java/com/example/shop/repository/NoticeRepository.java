@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NoticeRepository extends JpaRepository<NoticeEntity,Long> {
-    //맨앞을 대문자로 바꾸고 써야 jpa가 인식
     Page<NoticeEntity> findByNoticeTitleContaining(String searchKeyword, Pageable pageable);
-
 
 
 }

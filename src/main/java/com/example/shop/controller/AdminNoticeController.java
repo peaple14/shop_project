@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
@@ -56,7 +58,7 @@ public class AdminNoticeController {
     }
 
     @PostMapping("/notice_ok")
-    public String notice_ok(@ModelAttribute NoticeDTO noticeDTO){
+    public String notice_ok(@ModelAttribute NoticeDTO noticeDTO) throws IOException {
         noticeService.save(noticeDTO);
         return "redirect:/admin/notice";
     }
@@ -75,7 +77,6 @@ public class AdminNoticeController {
 
     @GetMapping("/notice/delete")
     public String noticeDelete(@RequestParam(name = "id") Long id, Model mode){
-        System.out.println("삭제할id = " + id + ", mode = " + mode);
         noticeService.noticeDelete(id);
         return "redirect:/admin/notice";
     }
