@@ -43,74 +43,95 @@
 <!-- 공지 시작 -->
 <div class="container my-5">
     <h2 th:text="${notice.noticeTitle}"></h2>
-    <p th:text="*{#temporals.format(notice.createdTime,'yyyy-MM-dd HH:mm:ss')}"></p>
-    <p th:text="'작성자: ' + ${notice.notice_name}"></p>
-    <p th:text="'조회수: ' + ${notice.notice_view}"></p>
+    <p th:text="*{#temporals.format(notice.noticeCreatedTime,'yyyy-MM-dd HH:mm:ss')}"></p>
+    <p th:text="'작성자: ' + ${notice.noticeName}"></p>
+    <p th:text="'조회수: ' + ${notice.noticeView}"></p>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">내용</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" th:text="${notice.notice_memo}" readonly></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" th:text="${notice.noticeMemo}" readonly></textarea>
     </div>
     <a class="btn btn-secondary" href="/notice" role="button">글목록</a>
 </div>
 <!-- 공지 끝 -->
 
-<!-- 댓글 작성 -->
+<!--댓글 달기-->
 <div id="comment-write">
-    <h3>댓글 작성</h3>
-    <div class="form-group">
-        <label for="commentWriter">이름</label>
-        <input type="text" class="form-control" id="commentWriter" placeholder="이름">
-    </div>
-    <div class="form-group">
-        <label for="commentMemo">내용</label>
-        <textarea class="form-control" id="commentMemo" rows="3"></textarea>
-    </div>
-    <button id="comment-write-btn" class="btn btn-primary">Submit</button>
+    <input type="text" class="form-control" id="commentWriter" placeholder="이름">
+    <textarea class="form-control" id="commentMemo" rows="3"></textarea>
+    <button id="comment-write-btn" class="btn btn-primary" onclick="commentWrite();">Submit</button>
 </div>
 
-<!-- 댓글 목록 -->
-<div id="comment-list">
-    <table>
-        <tr>
-            <td>작성자</td>
-            <td>내용</td>
-        </tr>
-    </table>
-</div>
+<!--댓글 출력-->
+<!--<div id="comment-list">-->
+<!--    <table class="table">-->
+<!--        <tr>-->
+<!--            <th>작성자</th>-->
+<!--            <th>내용</th>-->
+<!--            <th>작성일</th>-->
+<!--        </tr>-->
+<!--        <tr th:each="comment : ${comments}">-->
+<!--            <td th:text="${comment.commentWriter}"></td>-->
+<!--            <td th:text="${comment.commentMemo}"></td>-->
+<!--            <td th:text="${#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
 
-<!-- 푸터 시작 -->
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">Fluid jumbotron</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-    </div>
-</div>
-<!-- 푸터 끝 -->
 
-</body>
+
 <script th:inline="javascript">
-    $(document).ready(function() {
-        $("#comment-write-btn").click(function() {
-            const writer = $("#commentWriter").val();
-            const content = $("#commentMemo").val();
-            const id = [[${notice.id}]];
-            $.ajax({
-                type: "post",
-                url: "/comment/ok",
-                data: {
-                    "commentWriter": writer,
-                    "comment": content,
-                    "noticeid": id
-                },
-                success: function(response) {
-                    console.log("전송완료", response);
-                },
-                error: function(error) {
-                    console.log("전송실패", error);
-                }
-            });
+    const fetchComments = () => {//댓글목록가져옴
+        $.ajax({
+            type: "get",
+            url: "/comment/list",
+            data: {
+                "noticeId": [[${notice.id}]]
+            },
+            success: function (res) {
+                // 댓글 목록 업데이트 로직을 추가합니다.
+                // 예: 가져온 댓글 목록을 특정 영역에 출력하거나 새로 고치는 등의 동작을 수행합니다.
+                console.log("댓글 목록을 가져왔습니다.", res);
+                // 가져온 댓글 목록을 특정 영역에 출력하거나 업데이트하는 로직을 추가합니다.
+            },
+            error: function (err) {
+                console.log("댓글 목록을 가져오는데 실패했습니다.", err);
+            }
         });
-    });
+    }
+
+    const commentWrite = () => {
+        const writer = document.getElementById("commentWriter").value;
+        const content = document.getElementById("commentMemo").value;
+        const id = [[${notice.id}]];
+        console.log("이름: ", writer);
+        console.log("내용: ", content);
+        console.log("번호: ", id);
+        $.ajax({
+            type: "post",
+            url: "/comment/ok",
+            data: {
+                "commentWriter": writer,
+                "commentMemo": content,
+                "noticeId": id
+            },
+            success: function (res) {
+                console.log("전송완료", res);
+                // 댓글 작성 성공 시, 댓글 목록 업데이트
+                fetchComments();
+            },
+            error: function (err) {
+                console.log("전송실패", err);
+            }
+        });
+    }
 </script>
+위 코드에서 fetchComments 함수에서 실제로 댓글 목록을 가져오는 Ajax 호출을 수행하도록 수정해야 합니다. fetchComments 함수 내에서 가져온 댓글 목록을 출력하거나 업데이트하는 방식은 프로젝트의 요구사항에 따라 다를 수 있습니다. 이를 기반으로 웹 페이지에 댓글 목록을 업데이트하면 됩니다.
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
 </html>

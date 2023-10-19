@@ -67,9 +67,9 @@
         <td>
             <a th:text="${notice.noticeTitle}" th:href="@{'/notice_memo/' + ${notice.id}}"></a>
         </td>
-        <td th:text="${notice.notice_name}"></td>
+        <td th:text="${notice.getNoticeName}"></td>
         <td th:text="*{#temporals.format(notice.createdTime,'yyyy-MM-dd HH:mm:ss')}"></td>
-        <td th:text="${notice.notice_view}"></td>
+        <td th:text="${notice.getNoticeView}"></td>
     </tr>
     </tbody>
 </table>

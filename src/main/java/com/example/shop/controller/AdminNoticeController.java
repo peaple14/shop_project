@@ -22,7 +22,7 @@ public class AdminNoticeController {
 
     private final NoticeService noticeService;
 
-    //일반고객 공지사항볼때
+    //공지리스트
     @GetMapping("/notice")
     public String notice(Model model,
                          @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
@@ -55,29 +55,31 @@ public class AdminNoticeController {
         return "admin/notice/notice_memo";
     }
 
+    //글추가
     @GetMapping("/notice_add")
     public String notice_add(){
         return "admin/notice/notice_insert";
     }
 
+    //글추가 처리
     @PostMapping("/notice_ok")
     public String notice_ok(@ModelAttribute NoticeDTO noticeDTO) throws IOException {
         noticeService.save(noticeDTO);
         return "redirect:/admin/notice";
     }
-
+    //글수정
     @GetMapping("/notice_edit/{id}")
     public String n_edit(Model model, @PathVariable("id") long id){
         model.addAttribute("notice",noticeService.findById(id));
         return "admin/notice/notice_edit";
     }
-
+    //글수정 처리
     @PostMapping("/edit_ok")
     public String edit_ok(@RequestParam(name = "id") Long id,@ModelAttribute NoticeDTO noticeDTO){
         noticeService.update(id,noticeDTO);
         return "redirect:/admin/notice";
     }
-
+    //글삭제 처리
     @GetMapping("/notice/delete")
     public String noticeDelete(@RequestParam(name = "id") Long id, Model mode){
         noticeService.noticeDelete(id);

@@ -16,23 +16,23 @@ public class MemberEntity {
     private Long id;
 
     @Column()
-    private String user_id;
+    private String userId;
 
     @Column
-    private String user_pass;
+    private String userPass;
 
     @Column
-    private String user_email;
+    private String userEmail;
 
     @Column
-    private String user_name;
+    private String userName;
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setUser_id(memberDTO.getUser_id());
-        memberEntity.setUser_pass(memberDTO.getUser_pass());
-        memberEntity.setUser_email(memberDTO.getUser_email());
-        memberEntity.setUser_name(memberDTO.getUser_name());
+        memberEntity.setUserId(memberDTO.getUserId());
+        memberEntity.setUserPass(memberDTO.getUserPass());
+        memberEntity.setUserEmail(memberDTO.getUserEmail());
+        memberEntity.setUserName(memberDTO.getUserName());
         return memberEntity;
     }
 }

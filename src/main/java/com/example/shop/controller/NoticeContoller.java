@@ -1,5 +1,6 @@
 package com.example.shop.controller;
 
+import com.example.shop.dto.NoticeDTO;
 import com.example.shop.entity.NoticeEntity;
 import com.example.shop.service.NoticeService;
 import lombok.RequiredArgsConstructor;
@@ -44,8 +45,8 @@ public class NoticeContoller {
     }
 
     @GetMapping("/notice_memo/{id}")
-    public String n_memo(Model model, @PathVariable("id") long id){
-        noticeService.getview(id);
+    public String n_memo(Model model, @PathVariable long id){
+        NoticeDTO noticeDTO = noticeService.findById(id);
         model.addAttribute("notice",noticeService.findById(id));
         return "notice/notice_memo";
     }

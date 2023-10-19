@@ -44,19 +44,19 @@
     <form method="post" action="/admin/edit_ok">
     <div class="form-group">
         <label for="exampleInputEmail1">제목</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="notice_title"
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="noticeTitle"
                 th:value="${notice.noticeTitle}">
     </div>
 
     <div class="form-group">
         <label for="exampleInputEmail2">작성자</label>
-        <input type="text" class="form-control" id="exampleInputEmail2" name="notice_name" aria-describedby="emailHelp"
-               th:value="${notice.notice_name}">
+        <input type="text" class="form-control" id="exampleInputEmail2" name="noticeName" aria-describedby="emailHelp"
+               th:value="${notice.noticeName}">
     </div>
 
     <div class="form-group">
         <label for="exampleFormControlTextarea1">내용</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="notice_memo" th:text="${notice.notice_memo}"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="noticeMemo" th:text="${notice.noticeMemo}"></textarea>
     </div>
 
         <tr>

@@ -23,9 +23,10 @@ public class AdminService {
             if (adminEntity.getAdmPass().equals((adminDTO.getAdmPass()))) {
                 AdminDTO dto = adminDTO.toadminDTO(adminEntity);
                 return dto;
-            } else{
+            } else{//비번없으면
                 return null;
             }
+            //조회결과없으면
         }
     return null;
 

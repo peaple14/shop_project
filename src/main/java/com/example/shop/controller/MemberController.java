@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -25,7 +27,8 @@ public class MemberController {
     }
 
     @PostMapping("/join_ok")
-    public String join_ok(@ModelAttribute MemberDTO memberDTO){
+    public String join_ok(@ModelAttribute MemberDTO memberDTO, HttpSession session){
+        MemberDTO loginResult = memberService.login(memberDTO);
         memberService.save(memberDTO);
         return "Member/login";
     }

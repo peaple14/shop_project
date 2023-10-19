@@ -1,7 +1,5 @@
-package com.example.entity;
+package com.example.shop.entity;
 
-import com.example.shop.entity.BaseEntity;
-import com.example.shop.entity.NoticeEntity;
 import lombok.Getter;
 import lombok.Setter;
 

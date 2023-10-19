@@ -39,4 +39,12 @@ public class AdminController {
         }
         return null;
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "/admin";  // templates 폴더의 index.html 을 찾아감
+    }
+
+
 }

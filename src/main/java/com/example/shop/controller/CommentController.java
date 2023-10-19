@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/comment")
 public class CommentController {
 
-    private CommentService commentService;
+    private final CommentService commentService;
     @PostMapping("/ok")
     public @ResponseBody String save(@ModelAttribute CommentDTO commentDTO) {
         System.out.println("commentDTO = " + commentDTO);
