@@ -95,7 +95,7 @@ public class FindController {
 
 
         if (foundpassword != null) {
-//            emailService.sendSimpleMessage(mailDto);
+            emailService.sendSimpleMessage(mailDto);
             return "/Member/Findaccount/findpasswordresult";
         } else {
             return "redirect:/findpassword";
