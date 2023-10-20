@@ -1,4 +1,4 @@
-package com.example.shop.controller;
+package com.example.shop.controller.admin;
 
 import com.example.shop.dto.NoticeDTO;
 import com.example.shop.entity.NoticeEntity;

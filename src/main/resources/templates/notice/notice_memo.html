@@ -10,34 +10,8 @@
 
 <body>
 <!-- 메뉴 시작 -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-white">
-    <div class="container ">
-        <a class="navbar-brand text-dark" href="/">중고쇼핑몰</a>
-        <button class="navbar-toggler bg-secondary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link text-dark" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/shop">제품</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/join">회원가입</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/login">로그인</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
+<div th:replace="shopnav.html"></div>
+
 <!-- 메뉴 끝 -->
 
 <!-- 공지 시작 -->
@@ -55,32 +29,42 @@
 <!-- 공지 끝 -->
 
 <!--댓글 달기-->
+댓글
 <div id="comment-write">
     <input type="text" class="form-control" id="commentWriter" placeholder="이름">
     <textarea class="form-control" id="commentMemo" rows="3"></textarea>
     <button id="comment-write-btn" class="btn btn-primary" onclick="commentWrite();">Submit</button>
 </div>
 
-<!--댓글 출력-->
-<!--<div id="comment-list">-->
-<!--    <table class="table">-->
-<!--        <tr>-->
-<!--            <th>작성자</th>-->
-<!--            <th>내용</th>-->
-<!--            <th>작성일</th>-->
-<!--        </tr>-->
-<!--        <tr th:each="comment : ${comments}">-->
-<!--            <td th:text="${comment.commentWriter}"></td>-->
-<!--            <td th:text="${comment.commentMemo}"></td>-->
-<!--            <td th:text="${#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</div>-->
+댓글 출력
+<div id="comment-list">
+    <table class="table">
+        <tr>
+            <th>작성자</th>
+            <th>내용</th>
+            <th>작성일</th>
+        </tr>
+        <tr th:each="comment : ${comments}">
+            <td th:text="${comment.commentWriter}"></td>
+            <td th:text="${comment.commentMemo}"></td>
+            <td th:text="${#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+</div>
+
+
+<div th:replace="footer.html"></div>
 
 
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <script th:inline="javascript">
-    const fetchComments = () => {//댓글목록가져옴
+    $(document).ready(function() {
+        fetchComments(); // 페이지가 로드될 때 댓글 목록을 가져옵니다.
+    });
+
+    const fetchComments = () => {
         $.ajax({
             type: "get",
             url: "/comment/list",
@@ -88,10 +72,7 @@
                 "noticeId": [[${notice.id}]]
             },
             success: function (res) {
-                // 댓글 목록 업데이트 로직을 추가합니다.
-                // 예: 가져온 댓글 목록을 특정 영역에 출력하거나 새로 고치는 등의 동작을 수행합니다.
                 console.log("댓글 목록을 가져왔습니다.", res);
-                // 가져온 댓글 목록을 특정 영역에 출력하거나 업데이트하는 로직을 추가합니다.
             },
             error: function (err) {
                 console.log("댓글 목록을 가져오는데 실패했습니다.", err);
@@ -125,13 +106,5 @@
         });
     }
 </script>
-위 코드에서 fetchComments 함수에서 실제로 댓글 목록을 가져오는 Ajax 호출을 수행하도록 수정해야 합니다. fetchComments 함수 내에서 가져온 댓글 목록을 출력하거나 업데이트하는 방식은 프로젝트의 요구사항에 따라 다를 수 있습니다. 이를 기반으로 웹 페이지에 댓글 목록을 업데이트하면 됩니다.
-
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 </html>

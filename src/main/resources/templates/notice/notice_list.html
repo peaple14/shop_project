@@ -9,44 +9,8 @@
 
 <body>
 <!-- 메뉴 시작 -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-white">
-    <div class="container ">
-        <a class="navbar-brand text-dark" href="/">중고쇼핑몰</a>
-        <button class="navbar-toggler bg-secondary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link text-dark" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/shop">제품</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/join">회원가입</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/login">로그인</a>
-                </li>
-                <!-- 로그인 후 -->
-                <!--<li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/edit">정보수정</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/logout">로그아웃</a>
-                </li>-->
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/notice">공지사항</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
+<div th:replace="shopnav.html"></div>
+
 <!-- 메뉴 끝 -->
 
 
@@ -102,16 +66,9 @@
 </div>
 <!-- 검색 폼 끝 -->
 
+<div th:replace="footer.html"></div>
 
 
-
-<!-- 푸터 시작 -->
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">Fluid jumbotron</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-    </div>
-</div>
 
 <!-- 푸터 끝 -->
 

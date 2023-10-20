@@ -7,7 +7,9 @@ import com.example.shop.repository.NoticeFileRepository;
 import com.example.shop.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -106,7 +108,20 @@ public class NoticeService {
     }
 
 
-
-
-
+//    //페이징 다른방식
+//    public Page<NoticeDTO> paging(Pageable pageable) {
+//        int page = pageable.getPageNumber()-1;
+//        int pageLimit = 5; //한페이지에 보여줄 글의갯수
+//
+//        Page<NoticeEntity> noticeEntities = noticeRepository.findAll(PageRequest.of(page,pageLimit,Sort.by(Sort.Direction.DESC,"id")));
+//        /*
+//        getTotalElement : 전체 글 갯수
+//        get Number: DB로 요청한 페이지번호
+//        getTotalPage: 전체 페이지 갯수
+//        isFirst: 첫페이지 여부
+//        isLast:마지가페이지 여부
+//         */
+//        Page<NoticeDTO> noticeDTOS = noticeEntities.map(notice -> new NoticeDTO(notice.getId(), notice.getNoticeTitle(), notice.getNoticeName(), notice.getNoticeView(), notice.getCreatedTime()));
+//        return null;
+//    }
 }

@@ -37,8 +37,16 @@ import java.util.List;
     private List<String> storedFileName; //서버 저장용 파일명
     private int fileAttached; //파일 첨부 여부 (첨부 : 1, 노첨부 : 0)
 
+        //페이징용
+        public NoticeDTO(Long id, String noticeTitle, String noticeName, int noticeView, LocalDateTime noticeCreatedTime) {
+            this.id = id;
+            this.noticeTitle = noticeTitle;
+            this.noticeName = noticeName;
+            this.noticeView = noticeView;
+            this.noticeCreatedTime = noticeCreatedTime;
+        }
 
-    public List<MultipartFile> getNoticeFile() {//파일안올릴때 오류용
+        public List<MultipartFile> getNoticeFile() {//파일안올릴때 오류용
         if (noticeFile == null) {
             noticeFile = new ArrayList<>();
         }
