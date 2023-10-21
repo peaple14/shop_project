@@ -7,9 +7,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     //해야할일://"이부분가져오기" 부분 가져오기.
-    //해야할일:로그인찾기부분. 이메일부분수정 회원목록 나오게하고 삭제 가능하게. 로그아웃 세션제거 하기.
-    //해야할일:상품목록 나오고,넣고,수정,삭제 할수있게 번호(페이징)부분 잘나오게.
+    //해야할일: 회원목록 나오게하고 삭제 가능하게.
+    //해야할일:상품목록 수정기능
+
+
+    //이번엔 못하는것
     //지울것:"확인용"되어있는 Sout용.
+    //장바구니 담아서 넣기용
 
     private String resourcePath = "/upload/**"; //view접근하는 경로,임의의 저장 경로
 

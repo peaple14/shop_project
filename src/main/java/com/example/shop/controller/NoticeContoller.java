@@ -62,21 +62,6 @@ public class NoticeContoller {
         return "notice/notice_memo";
     }
 
-//    //페이징나누기(다른방식)
-//    @GetMapping("paging")
-//    public String paging(@PageableDefault(page=1)Pageable pageable, Model model){
-//        pageable.getPageNumber();
-//        Page<NoticeDTO> noticeList = noticeService.paging(pageable);
-//        int blockLimit = 3; //페이지 블록의 갯수
-//        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) -1) * blockLimit +1;
-//        int endPage = ((startPage + blockLimit -1) < noticeList.getTotalPages()) ? startPage + blockLimit -1 : noticeList.getTotalPages();
-//
-//        model.addAttribute("noticeList", noticeList);
-//        model.addAttribute("startPage", startPage);
-//        model.addAttribute("endPage", endPage);
-//
-//        return "paging";
-//    }
 
 
 

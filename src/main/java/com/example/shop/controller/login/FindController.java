@@ -5,6 +5,7 @@ import com.example.shop.dto.loginDTO.FindIdDTO;
 import com.example.shop.dto.loginDTO.FindPasswordDTO;
 import com.example.shop.dto.loginDTO.MailDto;
 import com.example.shop.repository.MemberRepository;
+import com.example.shop.service.loginservice.EmailService;
 import com.example.shop.service.loginservice.FindService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class FindController {
 
     private FindService findService;
 
-//    @Autowired
-//    private final EmailService emailService;
+    @Autowired
+    private final EmailService emailService;
 
 
     @GetMapping("/findId")
