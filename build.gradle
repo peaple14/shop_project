@@ -33,6 +33,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-logging', version: '2.6.0'
+
 
 //	implementation 'org.slf4j:slf4j-api:1.7.32'
 //	implementation 'ch.qos.logback:logback-classic:1.2.6'

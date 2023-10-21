@@ -1,6 +1,8 @@
-package com.example.shop.entity;
+package com.example.shop.entity.notice;
 
 import com.example.shop.dto.NoticeDTO;
+import com.example.shop.entity.BaseEntity;
+import com.example.shop.entity.CommentEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "notice_table")
-public class NoticeEntity extends BaseEntity{
+public class NoticeEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,9 +34,6 @@ public class NoticeEntity extends BaseEntity{
     @Column
     private int fileAttached; //파일 첨부의 값을 0 or 1을 받는다.
 
-    /*파일첨부 연동*/
-    @OneToMany(mappedBy = "noticeEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<NoticeFileEntity> noticeFileEntityList = new ArrayList<>(); //
 
     //댓글연동 부모엔티티-자식엔티티 연결
     @OneToMany(mappedBy = "noticeEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)

@@ -1,17 +1,14 @@
 package com.example.shop.service;
 
 import com.example.shop.dto.NoticeDTO;
-import com.example.shop.entity.NoticeEntity;
-import com.example.shop.entity.NoticeFileEntity;
-import com.example.shop.repository.NoticeFileRepository;
+import com.example.shop.entity.notice.NoticeEntity;
+
 import com.example.shop.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -24,31 +21,13 @@ import java.util.Optional;
 public class NoticeService {
 
     private final NoticeRepository noticeRepository;
-    private final NoticeFileRepository noticeFileRepository;
 
     //저장용
     @Transactional
     public void save(NoticeDTO noticeDTO) throws IOException {
-        if (noticeDTO.getNoticeFile().isEmpty()) {
-            //첨부파일이 없다면
-            NoticeEntity noticeEntity = NoticeEntity.toSaveEntity(noticeDTO);
-            noticeRepository.save(noticeEntity); //entity값으로 반환
-        } else {
-            //다중 업로드 : 부모 게시판 글 등록
-            NoticeEntity noticeEntity = NoticeEntity.toSaveFileEntity(noticeDTO); //공지사항 테이블에 글등록
-            Long savedId = noticeRepository.save(noticeEntity).getId(); //id값을 가져온다.
-            NoticeEntity notice = noticeRepository.findById(savedId).get(); //부모 entity에서 id값을 가져옴
-
-            for (MultipartFile noticeFile : noticeDTO.getNoticeFile()) { //DTO에 담긴 파일을 가져온다.
-                String originalFileName = noticeFile.getOriginalFilename(); //파일의 이름을 가져온다.
-                String storedFileName = System.currentTimeMillis() + "_" + originalFileName; //서버 저장용 이름을 생성한다. 1970.01.01
-                String savePath = "C:/shop_img/" + storedFileName; //파일의 저장경로
-                noticeFile.transferTo(new File(savePath)); //파일을 해당 경로에 저장
-
-                NoticeFileEntity noticeFileEntity = NoticeFileEntity.toNoticeFileEntity(notice, originalFileName, storedFileName);
-                noticeFileRepository.save(noticeFileEntity);
-            }
-        }
+        //첨부파일은 상품에만.
+        NoticeEntity noticeEntity = NoticeEntity.toSaveEntity(noticeDTO);
+        noticeRepository.save(noticeEntity); //entity값으로 반환
     }
 
 
@@ -111,17 +90,19 @@ public class NoticeService {
 //    //페이징 다른방식
 //    public Page<NoticeDTO> paging(Pageable pageable) {
 //        int page = pageable.getPageNumber()-1;
-//        int pageLimit = 5; //한페이지에 보여줄 글의갯수
+//        int pageLimit = 2; //한 페이지에 보여줄 글의 갯수
 //
-//        Page<NoticeEntity> noticeEntities = noticeRepository.findAll(PageRequest.of(page,pageLimit,Sort.by(Sort.Direction.DESC,"id")));
-//        /*
-//        getTotalElement : 전체 글 갯수
-//        get Number: DB로 요청한 페이지번호
-//        getTotalPage: 전체 페이지 갯수
-//        isFirst: 첫페이지 여부
-//        isLast:마지가페이지 여부
-//         */
-//        Page<NoticeDTO> noticeDTOS = noticeEntities.map(notice -> new NoticeDTO(notice.getId(), notice.getNoticeTitle(), notice.getNoticeName(), notice.getNoticeView(), notice.getCreatedTime()));
-//        return null;
-//    }
+//        Page<NoticeEntity> noticeEntities = noticeRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC,"id")));
+//
+//        /*getTotalElements : 전체 글 갯수;
+//        getNumber : DB로 요청한 페이지번호;
+//        getTotalPages : 전체 페이지 갯수
+//        isFirst : 첫페이지 여부
+//        isLast : 마지막 페이지 여부
+//        */
+//        Page<NoticeDTO> noticeDTOS = noticeEntities.map(notice -> new NoticeDTO(notice.getId(), notice.getNoticeTitle(), notice.getNoticeName(),notice.getNoticeHit(),notice.getCreatedTime()));
+//
+//        return noticeDTOS;
+//}
+
 }

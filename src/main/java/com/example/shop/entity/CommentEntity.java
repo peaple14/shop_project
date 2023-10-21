@@ -1,6 +1,7 @@
 package com.example.shop.entity;
 
 import com.example.shop.dto.CommentDTO;
+import com.example.shop.entity.notice.NoticeEntity;
 import lombok.Data;
 
 import javax.persistence.*;

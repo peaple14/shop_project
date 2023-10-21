@@ -5,9 +5,9 @@ import com.example.shop.dto.loginDTO.FindIdDTO;
 import com.example.shop.dto.loginDTO.FindPasswordDTO;
 import com.example.shop.dto.loginDTO.MailDto;
 import com.example.shop.repository.MemberRepository;
+import com.example.shop.service.loginservice.EmailService;
 import com.example.shop.service.loginservice.FindService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,13 +24,12 @@ public class FindController {
     //아이디,비밀번호 찾기용
 
 
-    @Autowired
-    private MemberRepository memberRepository;
 
-    private FindService findService;
+    private final MemberRepository memberRepository;
 
-//    @Autowired
-//    private final EmailService emailService;
+    private final FindService findService;
+
+    private final EmailService emailService;
 
 
     @GetMapping("/findId")
@@ -43,12 +42,9 @@ public class FindController {
         if (bindingResult.hasErrors()) {
             return "/Member/Findaccount/findId";
         }
-        System.out.println("여기오나");
-
         String email = form.getFindid_email();
-        String foundMember = findService.findIdByuserEmail(email);
-        System.out.println("아이디찾기:" + foundMember);
-
+        System.out.println("이메일은" + email);
+        String foundMember = findService.findUserIdByUserEmail(email);
         if (foundMember != null) {
             model.addAttribute("foundId", foundMember);
             return "/Member/Findaccount/findIdResult";
@@ -57,7 +53,6 @@ public class FindController {
         }
     }
 
-
     @GetMapping("/find/findIdResult")
     public String findIdResult(Model model, @RequestParam("foundId") String foundId) {
         model.addAttribute("foundId", foundId);
@@ -65,12 +60,12 @@ public class FindController {
 
     }
 
-    @GetMapping("/findpassword")
+    @GetMapping("/findPassword")
     public String findP(@ModelAttribute("FindPasswordForm") FindPasswordDTO form) {
         return "/Member/Findaccount/findpassword";
     }
 
-    @PostMapping("/findpassword")
+    @PostMapping("/findPassword")
     public String FindP(@Validated @ModelAttribute("FindIdForm") FindPasswordDTO form, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "/Member/Findaccount/findpassword";

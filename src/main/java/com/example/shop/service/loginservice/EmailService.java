@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 @Service
 @AllArgsConstructor
 public class EmailService {
-
+//여기서 환경변수 설정하기
 
     private JavaMailSender emailSender;
 

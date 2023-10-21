@@ -8,56 +8,51 @@
 </head>
 
 <body>
-
 <!-- 메뉴 시작 -->
-<div th:replace="admin/adminnav.html"></div>
+<div th:replace="shopnav.html"></div>
+
 <!-- 메뉴 끝 -->
 
 
-<!-- 공지시작 -->
+<!-- 공지 시작 -->
 <table class="table table-hover">
     <thead>
     <tr>
         <th scope="col">번호</th>
         <th scope="col">제목</th>
-        <th scope="col">작성자</th>
+        <th scope="col">가격</th>
         <th scope="col">등록일</th>
+        <th scope="col">조회수</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="notice : ${list}">
-        <td th:text="${notice.id}"></td>
+    <tr th:each="goods : ${list}">
+        <td th:text="${goods.id}"></td>
         <td>
-            <a th:text="${notice.noticeTitle}" th:href="@{'/admin/notice_memo/' + ${notice.id}}"></a>
+            <a th:text="${goods.goodsName}" th:href="@{'/goods_memo/' + ${goods.id}}"></a>
         </td>
-        <td th:text="${notice.getNoticeName}"></td>
-        <td th:text="*{#temporals.format(notice.createdTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${goods.goodsPrice}"></td>
+        <td th:text="*{#temporals.format(goods.createdTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${goods.goodsView}"></td>
     </tr>
     </tbody>
 </table>
-
-<a class="btn btn-primary float-right" href="/admin/notice_add">글쓰기</a>
-
-
-</div>
 <!-- 공지 끝 -->
 
 <!-- 페이지 번호 출력 시작 -->
 <div class="container my-3">
     <div class="pagination justify-content-center">
         <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/admin/notice(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
+            <a th:if="${page != nowPage}" th:href="@{/notice(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
             <strong th:if="${page == nowPage}" th:text="${page}" style="color: red"></strong>
         </th:block>
     </div>
 </div>
-
-
 <!-- 페이지 번호 출력 끝 -->
 
 <!-- 검색 폼 -->
 <div class="container my-3">
-    <form th:action="@{/admin/notice}" method="get">
+    <form th:action="@{/notice}" method="get">
         <div class="input-group">
             <input class="form-control" type="text" name="searchKeyword" th:value="${searchKeyword}" placeholder="검색어 입력">
             <div class="input-group-append">
@@ -68,12 +63,8 @@
 </div>
 <!-- 검색 폼 끝 -->
 
-
-
-
-
-
-
+<div th:replace="footer.html"></div>
+<!-- 푸터 끝 -->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>

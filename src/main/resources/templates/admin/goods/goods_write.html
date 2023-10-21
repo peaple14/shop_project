@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://cdn.ckeditor.com/4.23.0-lts/standard/ckeditor.js"></script>
+  <title>상품 등록</title>
+</head>
+<body>
+
+<!-- 메뉴 시작 -->
+<div th:replace="admin/adminnav.html"></div>
+<!-- 메뉴 끝 -->
+
+<div class="container my-5">
+  <form method="post" action="/admin/goods_ok" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="goodsName">상품명</label>
+      <input type="text" class="form-control" id="goodsName" name="goodsName" placeholder="상품명을 입력하세요" required>
+    </div>
+    <div class="form-group">
+      <label for="goodsPrice">판매 가격</label>
+      <input type="text" class="form-control" id="goodsPrice" name="goodsPrice" placeholder="판매 가격을 입력하세요" required>
+    </div>
+    <div class="form-group">
+      <label for="goodsMemo">상품 소개</label>
+      <textarea class="form-control" id="goodsMemo" rows="5" name="goodsMemo" required></textarea>
+      <script>CKEDITOR.replace('goodsMemo');</script>
+    </div>
+    <div class="form-group">
+      <label for="goodsFile">사진 첨부</label>
+      <input type="file" class="form-control-file" id="goodsFile" name="goodsFile" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-dark">상품 등록</button>
+  </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>

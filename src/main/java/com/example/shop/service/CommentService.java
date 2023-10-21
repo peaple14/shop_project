@@ -2,7 +2,7 @@ package com.example.shop.service;
 
 import com.example.shop.dto.CommentDTO;
 import com.example.shop.entity.CommentEntity;
-import com.example.shop.entity.NoticeEntity;
+import com.example.shop.entity.notice.NoticeEntity;
 import com.example.shop.repository.CommentRepository;
 import com.example.shop.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
