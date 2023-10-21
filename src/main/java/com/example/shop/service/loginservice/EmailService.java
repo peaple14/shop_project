@@ -12,7 +12,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 @AllArgsConstructor
 public class EmailService {
 
-
     private JavaMailSender emailSender;
 
     public void sendSimpleMessage(MailDto mailDto) {
