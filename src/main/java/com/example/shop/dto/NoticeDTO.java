@@ -1,8 +1,8 @@
 package com.example.shop.dto;
 
 
-import com.example.shop.entity.NoticeEntity;
-import com.example.shop.entity.NoticeFileEntity;
+
+import com.example.shop.entity.notice.NoticeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -61,25 +61,7 @@ public class NoticeDTO {
         noticeDTO.setNoticeView(noticeEntity.getNoticeView());
         noticeDTO.setNoticeCreatedTime(noticeEntity.getCreatedTime());
         noticeDTO.setNoticeUpdatedTime(noticeEntity.getUpdatedTime());
-        if(noticeEntity.getFileAttached() == 0){
-            noticeDTO.setFileAttached(noticeEntity.getFileAttached()); //0값
-        } else {
-
-            List<String> originalFileNameList = new ArrayList<>();
-            List<String> storedFileNameList = new ArrayList<>();
-            noticeDTO.setFileAttached(noticeEntity.getFileAttached());
-
-            for(NoticeFileEntity noticeFileEntity:noticeEntity.getNoticeFileEntityList()){
-                originalFileNameList.add(noticeFileEntity.getOriginalFileName());
-                storedFileNameList.add(noticeFileEntity.getStoredFileName());
-            }
-            noticeDTO.setOriginalFileName(originalFileNameList); //
-            noticeDTO.setStoredFileName(storedFileNameList);
-
-            //noticeDTO.setOriginalFileName(noticeEntity.getNoticeFileEntityList().get(0).getOriginalFileName()); //
-            //noticeDTO.setStoredFileName(noticeEntity.getNoticeFileEntityList().get(0).getStoredFileName());
-
-        }
+        noticeDTO.setFileAttached(noticeEntity.getFileAttached()); //0값
         return noticeDTO;
     }
 

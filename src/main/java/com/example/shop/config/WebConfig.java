@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
     //해야할일: 댓글부분 아마도 수정,세션부분 좀더 손봐주기,
     //지울것:"확인용"되어있는 Sout용.
     //못하는것:주문목록못함,주문해서 카카오톡api못함.
-    
+
 
     private String resourcePath = "/upload/**"; //view접근하는 경로,임의의 저장 경로
 
@@ -29,5 +29,4 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler(resourcePath)
                 .addResourceLocations(savePath);
     }
-
 }
