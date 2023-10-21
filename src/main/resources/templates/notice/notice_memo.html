@@ -11,6 +11,7 @@
 <body>
 <!-- 메뉴 시작 -->
 <div th:replace="shopnav.html"></div>
+
 <!-- 메뉴 끝 -->
 
 <!-- 공지 시작 -->
@@ -28,9 +29,7 @@
 <!-- 공지 끝 -->
 
 <!--댓글 달기-->
-
-<div class="container my-5">
-    댓글
+댓글
 <div id="comment-write">
     <input type="text" class="form-control" id="commentWriter" placeholder="이름">
     <textarea class="form-control" id="commentMemo" rows="3"></textarea>
@@ -52,7 +51,7 @@
         </tr>
     </table>
 </div>
-</div>
+
 
 <div th:replace="footer.html"></div>
 

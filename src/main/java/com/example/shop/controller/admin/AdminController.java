@@ -8,23 +8,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin")
 public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping()
+    @GetMapping("/admin")
     public String index(){
         return "/admin/admin";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/admin/login")
     public String save(@ModelAttribute AdminDTO adminDTO, HttpSession session, Model model){
         AdminDTO loginResult = adminService.login(adminDTO); //서비스에서 처리한결과 loginresult로.
         if(loginResult != null){
@@ -37,15 +35,15 @@ public class AdminController {
         }
         else{
             System.out.println("로그인 실패");
-            return "redirect:/admin";
             //로그인 실패
         }
+        return null;
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();
-        return "redirect:/admin";  // templates 폴더의 index.html 을 찾아감
+        return "/admin";  // templates 폴더의 index.html 을 찾아감
     }
 
 

@@ -5,7 +5,6 @@ import com.example.shop.dto.loginDTO.FindIdDTO;
 import com.example.shop.dto.loginDTO.FindPasswordDTO;
 import com.example.shop.dto.loginDTO.MailDto;
 import com.example.shop.repository.MemberRepository;
-import com.example.shop.service.loginservice.EmailService;
 import com.example.shop.service.loginservice.FindService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +24,13 @@ public class FindController {
     //아이디,비밀번호 찾기용
 
 
-
-    private final MemberRepository memberRepository;
-
-    private final FindService findService;
-
     @Autowired
-    private final EmailService emailService;
+    private MemberRepository memberRepository;
+
+    private FindService findService;
+
+//    @Autowired
+//    private final EmailService emailService;
 
 
     @GetMapping("/findId")
@@ -44,9 +43,12 @@ public class FindController {
         if (bindingResult.hasErrors()) {
             return "/Member/Findaccount/findId";
         }
+        System.out.println("여기오나");
+
         String email = form.getFindid_email();
-        System.out.println("이메일은" + email);
-        String foundMember = findService.findUserIdByUserEmail(email);
+        String foundMember = findService.findIdByuserEmail(email);
+        System.out.println("아이디찾기:" + foundMember);
+
         if (foundMember != null) {
             model.addAttribute("foundId", foundMember);
             return "/Member/Findaccount/findIdResult";
@@ -55,6 +57,7 @@ public class FindController {
         }
     }
 
+
     @GetMapping("/find/findIdResult")
     public String findIdResult(Model model, @RequestParam("foundId") String foundId) {
         model.addAttribute("foundId", foundId);
@@ -62,12 +65,12 @@ public class FindController {
 
     }
 
-    @GetMapping("/findPassword")
+    @GetMapping("/findpassword")
     public String findP(@ModelAttribute("FindPasswordForm") FindPasswordDTO form) {
         return "/Member/Findaccount/findpassword";
     }
 
-    @PostMapping("/findPassword")
+    @PostMapping("/findpassword")
     public String FindP(@Validated @ModelAttribute("FindIdForm") FindPasswordDTO form, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "/Member/Findaccount/findpassword";

@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="#">관리자모드</a>
@@ -11,27 +12,20 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/goods_list">상품목록</a>
+                    <a class="nav-link" href="/goods_list">상품목록 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/member_list">회원목록</a>
+                    <a class="nav-link" href="/member_list">회원목록 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/jumun_list">주문목록</a>
+                    <a class="nav-link" href="/jumun_list">주문목록 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/notice">공지사항</a>
+                    <a class="nav-link" href="/admin/notice">공지사항 </a>
                 </li>
                 <li class="nav-item">
-                    <form action="/admin/logout" method="post">
-                        <button type="submit" class="btn btn-link nav-link">로그아웃</button>
-                    </form>
-                </li>
-                <span th:if="${#session.getAttribute('loginName') != null}"
-                      class="greeting-text"
-                      style="color: red; font-weight: bold;">
                     안녕하십니까 <span th:text="${#session.getAttribute('loginName')}">로그인 이름</span> 님.
-                </span>
+                </li>
             </ul>
         </div>
     </div>

@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @ToString
-    public class NoticeDTO {
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+public class NoticeDTO {
         private Long id;
         private String noticeTitle;
         private String noticeName;
