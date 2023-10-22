@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-white">
-    <div class="container ">
+    <div class="container">
         <a class="navbar-brand text-dark" href="/">중고쇼핑몰</a>
         <button class="navbar-toggler bg-secondary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,22 +12,32 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="/goods">제품</a>
                 </li>
-                <li class="nav-item">
+<!--                <li class="nav-item" th:if="${not #strings.isEmpty(session.loginId)}">-->
+<!--                    <a class="nav-link text-dark" href="/member/edit">정보수정</a>-->
+<!--                </li>-->
+                <li class="nav-item" th:if="${not #strings.isEmpty(session.loginId)}">
+                    <form action="/member/logout" method="post">
+                        <button type="submit" class="nav-link text-dark" style="border: none; background: none; text-decoration: underline; cursor: pointer;">로그아웃</button>
+                    </form>
+                </li>
+                <li class="nav-item" th:if="${#strings.isEmpty(session.loginId)}">
+                    <a class="nav-link text-dark" href="/member/login">로그인</a>
+                </li>
+
+                <li class="nav-item" th:if="${#strings.isEmpty(session.loginId)}">
                     <a class="nav-link text-dark" href="/member/join">회원가입</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/login">로그인</a>
-                </li>
-                <!-- 로그인 후 -->
-                <!--<li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/edit">정보수정</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/member/logout">로그아웃</a>
-                </li>-->
-                <li class="nav-item">
                     <a class="nav-link text-dark" href="/notice">공지사항</a>
                 </li>
+                <li class="nav-item" th:if="${not #strings.isEmpty(session.loginId)}">
+                    <a class="nav-link text-dark" href="/member/edit" >안녕하십니까 <span th:text="${#session.getAttribute('loginName')}">로그인 이름</span> 님.</a>
+                </li>
+
+
+
+
+
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

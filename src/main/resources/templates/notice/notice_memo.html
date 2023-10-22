@@ -25,9 +25,9 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" th:text="${notice.noticeMemo}" readonly></textarea>
     </div>
     <a class="btn btn-secondary" href="/notice" role="button">글목록</a>
-</div>
-<!-- 공지 끝 -->
 
+<!-- 공지 끝 -->
+<div style="margin-top: 20px;"></div>
 <!--댓글 달기-->
 댓글
 <div id="comment-write">
@@ -35,7 +35,7 @@
     <textarea class="form-control" id="commentMemo" rows="3"></textarea>
     <button id="comment-write-btn" class="btn btn-primary" onclick="commentWrite();">Submit</button>
 </div>
-
+    <div style="margin-top: 20px;"></div>
 댓글 출력
 <div id="comment-list">
     <table class="table">
@@ -51,7 +51,7 @@
         </tr>
     </table>
 </div>
-
+</div>
 
 <div th:replace="footer.html"></div>
 

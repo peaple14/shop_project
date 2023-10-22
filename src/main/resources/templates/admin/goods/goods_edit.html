@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <title>Hello, world!</title>
+</head>
+<body>
+<!-- 메뉴 시작 -->
+<div th:replace="admin/adminnav.html"></div>
+<!-- 메뉴 끝 -->
+
+<div class="container my-5">
+  <!-- 상품 수정 폼 시작 -->
+  <form method="post" action="/admin/goods_edit_ok">
+
+    <tr th:if="${goods.fileAttached == 1}">
+      <td>
+        <img th:each="fileName : ${goods.storedFileName}" th:src="@{|/upload/${fileName}|}" width="100%">
+      </td>
+    </tr>
+
+    <div class="form-group">
+      <label for="goodsName">상품 제목</label>
+      <input type="text" class="form-control" id="goodsName" name="goodsName" th:value="${goods.goodsName}">
+    </div>
+    <div class="form-group">
+      <label for="goodsPrice">상품 가격</label>
+      <input type="number" class="form-control" id="goodsPrice" name="goodsPrice" th:value="${goods.goodsPrice}">
+    </div>
+    <div class="form-group">
+      <label for="goodsMemo">상품 설명</label>
+      <textarea class="form-control" id="goodsMemo" name="goodsMemo" rows="3" th:text="${goods.goodsMemo}"></textarea>
+    </div>
+    <input type="hidden" name="id" th:value="${goods.id}">
+    <td colspan="2" ><input type="submit" value="수정"></td>
+  </form>
+  <!-- 상품 수정 폼 끝 -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src ="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <title>Hello, world!</title>
 </head>
 
@@ -48,14 +49,50 @@
         <button type="submit" class="btn btn-primary">회원가입</button>
     </form>
 </div>
+
+<div th:replace="footer.html"></div>
 <!-- 회원가입 폼 끝 -->
+
+<script th:inline="javascript">
+    const idCheck = () => {
+        const userId = document.getElementById("userId").value;
+        const checkResult = document.getElementById("check-result");
+        console.log("입력값: ", userId);
+
+        $.ajax({
+            type:"post",
+            url:"/member/id-check",
+            data: {
+                "userId":userId
+            },
+            success: function(res){
+                console.log("요청성공",res);
+                if (res =="ok") {
+                    console.log("사용가능한 아이디입니다.");
+                    checkResult.style.color = "blue";
+                    checkResult.innerHTML = "사용가능한 아이디입니다.";
+                } else {
+                    console.log("이미 사용중인 아이디입니다.");
+                    checkResult.style.color ="red";
+                    checkResult.innerHTML = "이미 사용중인 아이디입니다.";
+                }
+
+            },
+            error: function(err){
+                console.log("에러발생",err);
+            }
+        });
+    }
+</script>
+
+
 
 <script>
     const passwordInput = document.getElementById('inputPassword4');
     const passwordConfirmInput = document.getElementById('inputPasswordConfirm');
     const passwordMatchMessage = document.getElementById('passwordMatchMessage');
 
-    passwordInput.addEventListener('input', () => {
+    const checkPasswordMatch = () => {
         const password = passwordInput.value;
         const confirmPassword = passwordConfirmInput.value;
 
@@ -64,7 +101,10 @@
         } else {
             passwordMatchMessage.textContent = '비밀번호가 일치하지 않습니다.';
         }
-    });
+    };
+
+    passwordInput.addEventListener('input', checkPasswordMatch);
+    passwordConfirmInput.addEventListener('input', checkPasswordMatch);
 
     const joinForm = document.getElementById('joinForm');
 
@@ -78,13 +118,8 @@
         }
     });
 </script>
-<script>
-    const idCheck = () => { //이부분 가져오기
-        const userId = document.getElementById("user_id").value;
-        const checkResult = document.getElementById("check-result");
-    }
-</script>
+
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" ></script>
+
 </html>

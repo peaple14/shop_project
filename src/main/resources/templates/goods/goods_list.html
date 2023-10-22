@@ -32,7 +32,7 @@
         <td>
             <a th:text="${goods.goodsName}" th:href="@{'/goods_memo/' + ${goods.id}}"></a>
         </td>
-        <td th:text="${goods.goodsPrice}"></td>
+        <td th:text="${goods.goodsPrice} + 원"></td>
         <td th:text="*{#temporals.format(goods.createdTime,'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${goods.goodsView}"></td>
     </tr>
@@ -61,6 +61,8 @@
             </div>
         </div>
     </form>
+</div>
+
 </div>
 <!-- 검색 폼 끝 -->
 

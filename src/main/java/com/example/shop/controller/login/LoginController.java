@@ -6,9 +6,7 @@ import com.example.shop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -64,6 +62,24 @@ public class LoginController {
             System.out.println("로그인 실패");
             return "redirect:/login";
         }
+    }
+
+
+    //로그아웃기능
+    @PostMapping ("/member/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
+    }
+
+
+    //id중복확인
+    @PostMapping("/member/id-check")
+    public @ResponseBody String idCheck(@RequestParam("userId") String userId) {
+        System.out.println("userId = " + userId);
+        String checkResult = memberService.idCheck(userId);
+        return checkResult;
+
     }
 
 

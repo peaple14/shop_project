@@ -81,6 +81,7 @@ public class AdminGoodsController {
     //글수정 처리
     @PostMapping("/goods_edit_ok")
     public String edit_ok(@RequestParam(name = "id") Long id,@ModelAttribute GoodsDTO goodsDTO){
+
         goodsService.update(id,goodsDTO);
         return "redirect:/admin/goods";
     }

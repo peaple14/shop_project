@@ -1,5 +1,6 @@
 package com.example.shop.controller;
 
+import com.example.shop.dto.GoodsDTO;
 import com.example.shop.entity.goods.GoodsEntity;
 import com.example.shop.service.GoodsService;
 import lombok.RequiredArgsConstructor;
@@ -57,8 +58,11 @@ public class GoodsController {
 
     //상품상세
     @GetMapping("/goods_memo/{id}")
-    public String g_memo(Model model, @PathVariable long id){
-        model.addAttribute("notice",goodsService.findById(id));
+    public String g_memo( @PathVariable long id,Model model){
+        goodsService.getview(id);//조회수증가용
+        GoodsDTO goodsDTO = goodsService.findById(id);
+        model.addAttribute("goods",goodsDTO);
+        System.out.println("굿즈 상세 테스트용:" + goodsDTO);
         return "goods/goods_detail";
     }
 

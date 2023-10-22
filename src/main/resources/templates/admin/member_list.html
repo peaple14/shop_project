@@ -23,19 +23,19 @@
             <th scope="col">번호</th>
             <th scope="col">아이디</th>
             <th scope="col">이름</th>
-            <th scope="col">전화번호</th>
             <th scope="col">이메일</th>
             <th scope="col">삭제</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Otto1</td>
-            <td>Otto</td>
-            <td>1000원</td>
-            <td>Otto@email.com</td>
-            <td>삭제</td>
+        <tr th:each="member : ${list.content}">
+            <td th:text="${member.id}">1</td>
+            <td th:text="${member.userId}">Otto1</td>
+            <td th:text="${member.userName}">Otto</td>
+            <td th:text="${member.userEmail}">1000원</td>
+            <td>
+            <a class="btn btn-danger" th:href="@{/admin/member/delete(id=${member.id})}">삭제</a>
+            </td>
         </tr>
         </tbody>
     </table>

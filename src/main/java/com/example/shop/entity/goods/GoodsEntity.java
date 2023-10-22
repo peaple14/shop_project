@@ -3,6 +3,7 @@ package com.example.shop.entity.goods;
 import com.example.shop.dto.GoodsDTO;
 import com.example.shop.entity.BaseEntity;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.persistence.*;
@@ -51,7 +52,7 @@ public class GoodsEntity extends BaseEntity {
     }
 
     //더티 체킹
-    public void update( String goods_name,String goods_memo,Long goods_price){
+    public void update(String goods_name, String goods_memo, Long goods_price){
         this.goodsName = goods_name;
         this.goodsPrice = goods_price;
         this.goodsMemo = goods_memo;

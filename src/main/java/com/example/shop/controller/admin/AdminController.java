@@ -1,5 +1,4 @@
 package com.example.shop.controller.admin;
-
 import com.example.shop.dto.AdminDTO;
 import com.example.shop.service.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -8,21 +7,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/admin")
 public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping("/admin")
+
+    @GetMapping("")
     public String index(){
         return "/admin/admin";
     }
 
-    @PostMapping("/admin/login")
+    @PostMapping("/login")
     public String save(@ModelAttribute AdminDTO adminDTO, HttpSession session, Model model){
         AdminDTO loginResult = adminService.login(adminDTO); //서비스에서 처리한결과 loginresult로.
         if(loginResult != null){
@@ -40,11 +42,18 @@ public class AdminController {
         return null;
     }
 
-    @GetMapping("/logout")
+
+
+    @PostMapping ("/logout")
     public String logout(HttpSession session){
         session.invalidate();
-        return "/admin";  // templates 폴더의 index.html 을 찾아감
+        return "redirect:/admin";  // templates 폴더의 index.html 을 찾아감
     }
+
+
+
+
+
 
 
 }
